@@ -1,0 +1,61 @@
+<TestPlan>
+  <ThreadGroup>
+    <stringProp name="ThreadGroup.num_threads">100</stringProp>
+    <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+    <stringProp name="ThreadGroup.loop_count">5</stringProp>
+
+    <!-- Frontend Search Product -->
+    <Sampler>
+      <HTTPRequest>
+        <stringProp name="HTTPSampler.path">/search?q=Titan+watch</stringProp>
+        <stringProp name="HTTPSampler.method">GET</stringProp>
+      </HTTPRequest>
+    </Sampler>
+
+    <!-- Frontend Add to Cart -->
+    <Sampler>
+      <HTTPPost>
+        <stringProp name="HTTPSampler.path">/add-to-cart</stringProp>
+        <stringProp name="HTTPSampler.method">POST</stringProp>
+        <Arguments>
+          <Argument name="product_id" value="12345"/>
+        </Arguments>
+      </HTTPPost>
+    </Sampler>
+
+    <!-- Frontend Checkout -->
+    <Sampler>
+      <HTTPPost>
+        <stringProp name="HTTPSampler.path">/checkout</stringProp>
+        <stringProp name="HTTPSampler.method">POST</stringProp>
+        <Arguments>
+          <Argument name="cart_id" value="67890"/>
+        </Arguments>
+      </HTTPPost>
+    </Sampler>
+
+    <!-- Backend Search API -->
+    <Sampler>
+      <HTTPRequest>
+        <stringProp name="HTTPSampler.path">/api/search?query=Titan+watch</stringProp>
+        <stringProp name="HTTPSampler.method">GET</stringProp>
+      </HTTPRequest>
+    </Sampler>
+
+    <!-- Backend Product Details API -->
+    <Sampler>
+      <HTTPRequest>
+        <stringProp name="HTTPSampler.path">/api/product/12345</stringProp>
+        <stringProp name="HTTPSampler.method">GET</stringProp>
+      </HTTPRequest>
+    </Sampler>
+
+    <!-- Listeners -->
+    <Listener>
+      <ViewResultsTree/>
+    </Listener>
+    <Listener>
+      <SummaryReport/>
+    </Listener>
+  </ThreadGroup>
+</TestPlan>

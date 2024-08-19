@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Run Cypress Tests
+echo "Running Cypress Tests..."
+npx cypress run
+
+# Run JMeter Performance Tests
+echo "Running JMeter Performance Tests..."
+jmeter -n -t path/to/test_plan.jmx -l path/to/results.jtl
+
+# Generate JMeter Report (Optional)
+echo "Generating JMeter Report..."
+jmeter -g path/to/results.jtl -e -o path/to/report_folder
+
+echo "Tests completed!"
